@@ -1,0 +1,66 @@
+<nav class="navbar navbar-expand-sm bg-primary navbar-dark">
+    <!-- Links -->
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a href="create" class="nav-link" routerLinkActive="active">Add Asset</a>
+        </li>
+
+        <li class="nav-item">
+            <a href="assets" class="nav-link" routerLinkActive="active"> Asset List</a>
+        </li>
+
+
+        <li class="nav-item">
+            <a href="login" class="nav-link" routerLinkActive="active">LogOut</a>
+        </li>
+
+    </ul>
+</nav>
+
+<div style="text-align: center">
+    <b>Welcome {{uname}}</b></div>
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h2>Asset List</h2>
+    </div>
+
+    <div class="panel-body">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>ASSETNAME</th>
+                    <th>ASSETTYPE</th>
+                    <th>ASSETCLASS</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let asset of assets | async | paginate:{itemsPerPage:2,currentPage:p};let i=index">
+                    <td>{{asset.ad_id}}</td>
+                    <td>{{asset.ad_name}}</td>
+                    <td>{{asset.ad_type_id}}</td>
+                    <td>{{asset.ad_class}}</td>
+
+
+
+                    <td><button (click)="deleteAsset(asset.ad_id)" class="btn btn-danger">Delete</button>
+                        <button [routerLink]="['/edit',asset.ad_id]" routerLinkActive="active" class="btn btn-info"
+                            style="margin-left: 10px">Update</button>
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="login">
+        <input name="text-align" placeholder="enter asstname" [(ngModel)]="SearchString"
+            (ngModelChange)="search(SearchString)">
+        <button type="submit" value="Search" (click)="Search(SearchString)" class="btn-info">Search</button>
+    </div>
+
+
+</div>
+<div align="center">
+    <pagination-controls (pageChange)="p=$event"></pagination-controls>
+</div>
