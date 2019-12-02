@@ -43,6 +43,7 @@ export class AssetMasterComponent implements OnInit {
       this.purchase=res;
       this.master.am_ad_name=res["pd_ad_name"];
       this.master.am_atype_name=res["pd_type_name"];
+      console.log(this.master.am_atype_name);
       this.master.am_make_name=res["pd_vendor_name"];
       this.master.am_quantity=res["pd_qty"];
       this.master.am_pdate=res["pd_ddateStr"];

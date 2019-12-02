@@ -46,7 +46,7 @@ export class AssetListComponent implements OnInit {
   
   Search(name:string)
   {
-    if(name=="")
+    if(name==null)
     {
       this.assets=this.assetService.getAssetList();
     }
