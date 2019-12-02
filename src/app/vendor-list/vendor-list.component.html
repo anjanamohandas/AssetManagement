@@ -1,0 +1,88 @@
+<div align="center" class="panel-heading">
+        <h2><b>Vendor List</b></h2>
+    </div>
+
+<nav class="navbar navbar-expand-sm bg-primary navbar-dark bg-dark" >
+    <ul class="navbar-nav">
+      <li class="nav-item">
+          <a href="create" class="nav-link" routerLinkActive="active">Asset Definition</a>
+      </li>
+      <li class="nav-item">
+        <a href="Vendorlist" class="nav-link active" routerLinkActive="active">Vendor</a>
+    </li>
+    <li class="nav-item">
+        <a href="assetmaster/:id" class="nav-link" routerLinkActive="active">Asset Master</a>
+    </li>
+    <li class="nav-item">
+      <a href="login" class="nav-link" routerLinkActive="active" (click)="Logout()">Logout</a>
+  </li>
+  
+    </ul>
+  </nav>
+  <nav class="navbar navbar-expand-sm bg-primary navbar-dark bg-dark" >
+      <ul class="navbar-nav">
+        <li class="nav-item">
+            <a href="vendor" class="nav-link" routerLinkActive="active">Add Vendor</a>
+        </li>
+        <li class="nav-item">
+          <a href="Vendorlist " class="nav-link active" routerLinkActive="active">Vendor List</a>
+      </li>
+     
+      </ul>
+    </nav>
+
+<!-- <div style="text-align: center">
+    <b>Welcome {{uname}}</b></div> -->
+<div class="panel panel-primary">
+    
+
+    <div class="panel-body">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>VendorType</th>
+                    <th>AssetType</th>
+                    <th>ValidFrom</th>
+                    <th>ValidTo</th>
+                    <th>Address</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let vendor of vendors | async | paginate:{itemsPerPage:4,currentPage:p};let i=index">
+                    <td>{{vendor.vd_id}}</td>
+                    <td>{{vendor.vd_name}}</td>
+                    <td>{{vendor.vd_type}}</td>
+                    <td>{{vendor.vd_atype_name}}</td>
+                    <td>{{vendor.vd_from}}</td>
+                    <td>{{vendor.vd_to}}</td>
+                    <td>{{vendor.vd_addr}}</td>
+
+
+
+                    <td><button class="btn btn-danger" mwlConfirmationPopover [popoverTitle]="popoverTitle"
+                            [popoverMessage]="popoverMessage" placement="left" (confirm)="confirmClicked = true"
+                            (cancel)="cancelClicked = true" confirmButtonType="warning" cancelButtonType="default"
+                            (click)="confirmClicked=false;
+                      cancelClicked=false" [appendToBody]="true" (confirm)="deleteVendor(vendor.vd_id)">Delete</button>
+                        <button [routerLink]="['/update',vendor.vd_id]" routerLinkActive="active" class="btn btn-info"
+                            style="margin-left: 10px">Update</button>
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+  <!--   <div class="login">
+        <input name="text-align" placeholder="enter asstname" [(ngModel)]="SearchString"
+            (ngModelChange)="search(SearchString)">
+        <button type="submit" value="Search" (click)="Search(SearchString)" class="btn-info">Search</button>
+    </div> -->
+
+
+</div>
+<div align="center">
+    <pagination-controls (pageChange)="p=$event"></pagination-controls>
+</div>

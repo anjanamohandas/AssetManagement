@@ -43,29 +43,31 @@ export class LoginComponent implements OnInit {
       this.toastr.error('Enter username and password');
       return;
     }
-    this.authService.Login(this.login).subscribe(x => {
-      x.forEach(element => {
+    this.authService.Login(this.login).subscribe(element => {
+      if(element!=null)
+      {
         this.login.u_type = element["u_type"];
         console.log(this.login.u_type);
         if (this.login.u_type == 'Admin') {
-          localStorage.setItem('u_name', this.login.u_name);
+          localStorage.setItem('ACCESS_TOKEN', this.login.u_name);
           this.router.navigateByUrl('admin');
           this.toastr.success('Login Successful');
         }
         else {
-          localStorage.setItem('u_name', this.login.u_name);
+          localStorage.setItem('ACCESS_TOKEN', this.login.u_name);
           this.router.navigateByUrl('user');
 
           this.toastr.success('Login Successful');
         }
-      },
-        error => {
+      }
 
-          this.toastr.error('Invalid Username or Password');
+      else{
+        this.toastr.error("Invalid Username and Password");
+      }
+       
+      });
 
-        });
-      console.log(this.login.u_type);
-    });
+    
 
 
   }

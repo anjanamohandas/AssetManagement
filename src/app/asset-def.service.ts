@@ -7,41 +7,44 @@ import { AssetDef } from './asset-def';
   providedIn: 'root'
 })
 export class AssetDefService {
-  private baseUrl='http://localhost:56120/api';
+  private baseUrl='http://localhost:51734/api';
 
   constructor(private http:HttpClient) { }
 
   getAssetList():Observable<any>{
-    return this.http.get(this.baseUrl+'/Asset_def');
+    return this.http.get(this.baseUrl+'/AssetDef');
   }
 
   deleteAsset(id:number):Observable<any>{
-    return this.http.delete(this.baseUrl+'/Asset_def/'+id);
+    return this.http.delete(this.baseUrl+'/AssetDef/'+id);
 
   } 
 
   addAsset(pdt:AssetDef){
-    return this.http.post(this.baseUrl+'/Asset_def',pdt);
+    return this.http.post(this.baseUrl+'/AssetDef',pdt);
   }
 
   GetAsset(id:number):Observable<any>{
-    return this.http.get(this.baseUrl+'/Asset_def/'+id)
+    return this.http.get(this.baseUrl+'/AssetDef/'+id);
   }
   
   UpdateAsset(id:number,asset:AssetDef){
-    return this.http.put(this.baseUrl+'/Asset_def/'+id,asset);
+    return this.http.put(this.baseUrl+'/AssetDef/'+id,asset);
   }
   searchAsset(name:string):Observable<any>
   {
-    return this.http.get(this.baseUrl+'/assets?name='+name);
+    return this.http.get(this.baseUrl+'/AssetDef?name='+name);
   }
 
   getAssetType(id: number):Observable<any>{
-    return this.http.get(this.baseUrl+'/Asset_type/'+id);
+    return this.http.get(this.baseUrl+'/AssetType/'+id);
   }
 
   getAssetTypes():Observable<any>{
-    return this.http.get(this.baseUrl+'/Asset_type');
+    return this.http.get(this.baseUrl+'/AssetType');
+  }
+  putAssetDef(id:number, asset: AssetDef):Observable<any>{
+    return this.http.put(this.baseUrl+'/AssetDef/'+id,asset);
   }
 
 
